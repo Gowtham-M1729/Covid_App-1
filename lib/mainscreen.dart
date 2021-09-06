@@ -1,6 +1,8 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:covid_app/pickCountry.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -12,16 +14,18 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          UserDetails(),
-          ReportWidget(),
-          CovidResources(),
-          MostCases(),
-          SearchWidget(),
-        ],
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            UserDetails(),
+            ReportWidget(),
+            CovidResources(),
+            MostCases(),
+            SearchWidget(),
+          ],
+        ),
       ),
     );
   }
@@ -223,37 +227,56 @@ class UserDetails extends StatelessWidget {
 }
 
 class SearchWidget extends StatelessWidget {
-  const SearchWidget({
-    Key? key,
-  }) : super(key: key);
+  // String countryName = '';
+  // const SearchWidget({
+  //   Key? key,
+  // }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(alignment: AlignmentDirectional.center, children: [
-      SvgPicture.string(
-        '<svg viewBox="0.0 772.0 393.0 79.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 405.0, 919.0)" d="M 11.99970054626465 101.9876480102539 L 11.99970054626465 68.00040435791016 L 405.0003051757812 68.00040435791016 L 405.0003051757812 101.9876327514648 C 378.3428039550781 128.0993041992188 300.44482421875 146.9996948242188 208.4999847412109 146.9996948242188 C 116.5551605224609 146.9996948242188 38.6572151184082 128.0993194580078 11.99970054626465 101.9876480102539 Z" fill="#6a3785" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
-        allowDrawingOutsideViewBox: true,
-        fit: BoxFit.cover,
-      ),
-      Column(
-        children: [
-          Icon(
-            Icons.search,
-            color: Colors.white,
-            size: 35,
-          ),
-          Text(
-            'SEARCH',
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 26,
-              color: const Color(0xfffff2f2),
+    return InkWell(
+      onTap: () {
+        showCountryPicker(
+          context: context,
+          onSelect: (Country country) {
+            // countryName = country.name;
+            print(country.name);
+          },
+          countryListTheme: CountryListThemeData(
+            backgroundColor: Color(0xfffff2f2),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
             ),
-            textAlign: TextAlign.left,
           ),
-        ],
-      )
-    ]);
+        );
+      },
+      child: Stack(alignment: AlignmentDirectional.center, children: [
+        SvgPicture.string(
+          '<svg viewBox="0.0 772.0 393.0 79.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 405.0, 919.0)" d="M 11.99970054626465 101.9876480102539 L 11.99970054626465 68.00040435791016 L 405.0003051757812 68.00040435791016 L 405.0003051757812 101.9876327514648 C 378.3428039550781 128.0993041992188 300.44482421875 146.9996948242188 208.4999847412109 146.9996948242188 C 116.5551605224609 146.9996948242188 38.6572151184082 128.0993194580078 11.99970054626465 101.9876480102539 Z" fill="#6a3785" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
+          allowDrawingOutsideViewBox: true,
+          fit: BoxFit.cover,
+        ),
+        Column(
+          children: [
+            Icon(
+              Icons.search,
+              color: Colors.white,
+              size: 35,
+            ),
+            Text(
+              'SEARCH',
+              style: TextStyle(
+                fontFamily: 'Segoe UI',
+                fontSize: 26,
+                color: const Color(0xfffff2f2),
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        )
+      ]),
+    );
   }
 }
 

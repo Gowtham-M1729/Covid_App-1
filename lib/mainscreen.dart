@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -152,24 +153,40 @@ class CovidResources extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  _launchURL() async {
+    const url = 'https://www.covidresourcesindia.com/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: _launchURL,
       child: Container(
+        width: 350.0,
         padding: EdgeInsets.fromLTRB(70.0, 25.0, 70.0, 25.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17.0),
           color: const Color(0xff8f7ae2),
         ),
-        child: Text(
-          'COVID RESOURCES',
-          style: TextStyle(
-            fontFamily: 'Segoe UI',
-            fontSize: 20,
-            color: const Color(0xfffff0f0),
-          ),
-          textAlign: TextAlign.left,
+        child: Row(
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              'COVID RESOURCES',
+              style: TextStyle(
+                fontFamily: 'Segoe UI',
+                fontSize: 20,
+                color: const Color(0xfffff0f0),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Icon(Icons.double_arrow_outlined, size: 30.0)
+          ],
         ),
       ),
     );

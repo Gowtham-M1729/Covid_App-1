@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -152,10 +153,21 @@ class CovidResources extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  _launchURLBrowser() async {
+    const url = 'https://www.geeksforgeeks.org/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        _launchURLBrowser();
+      },
       child: Container(
         padding: EdgeInsets.fromLTRB(70.0, 25.0, 70.0, 25.0),
         decoration: BoxDecoration(

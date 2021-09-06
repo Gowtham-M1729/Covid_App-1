@@ -154,20 +154,23 @@ class CovidResources extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(70.0, 25.0, 70.0, 25.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17.0),
-        color: const Color(0xff8f7ae2),
-      ),
-      child: Text(
-        'COVID RESOURCES',
-        style: TextStyle(
-          fontFamily: 'Segoe UI',
-          fontSize: 20,
-          color: const Color(0xfffff0f0),
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.fromLTRB(70.0, 25.0, 70.0, 25.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(17.0),
+          color: const Color(0xff8f7ae2),
         ),
-        textAlign: TextAlign.left,
+        child: Text(
+          'COVID RESOURCES',
+          style: TextStyle(
+            fontFamily: 'Segoe UI',
+            fontSize: 20,
+            color: const Color(0xfffff0f0),
+          ),
+          textAlign: TextAlign.left,
+        ),
       ),
     );
   }

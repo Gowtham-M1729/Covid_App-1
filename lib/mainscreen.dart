@@ -166,6 +166,9 @@ class CovidResources extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        const snackBar = SnackBar(content: Text('Tap'));
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
         _launchURLBrowser();
       },
       child: Container(

@@ -13,7 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           UserDetails(),
           ReportWidget(),
@@ -55,8 +55,8 @@ class MostCases extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             Container(
-              margin: EdgeInsets.all(10.0),
-              height: 185.0,
+              margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+              height: 305.0,
               child: ListView(
                 children: [
                   Container(
@@ -127,7 +127,7 @@ class CountryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -216,7 +216,7 @@ class SearchWidget extends StatelessWidget {
       SvgPicture.string(
         '<svg viewBox="0.0 772.0 393.0 79.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 405.0, 919.0)" d="M 11.99970054626465 101.9876480102539 L 11.99970054626465 68.00040435791016 L 405.0003051757812 68.00040435791016 L 405.0003051757812 101.9876327514648 C 378.3428039550781 128.0993041992188 300.44482421875 146.9996948242188 208.4999847412109 146.9996948242188 C 116.5551605224609 146.9996948242188 38.6572151184082 128.0993194580078 11.99970054626465 101.9876480102539 Z" fill="#6a3785" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
         allowDrawingOutsideViewBox: true,
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
       Column(
         children: [

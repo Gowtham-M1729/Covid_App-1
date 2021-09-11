@@ -235,17 +235,16 @@ class SearchWidget extends StatelessWidget {
             children: [
               Icon(
                 Icons.search,
-                color: Colors.amber,
+                color: Colors.white,
                 size: 35,
               ),
               Text(
                 'SEARCH',
                 style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 26,
-                  // color: const Color(0xfffff2f2),
-                  color: Colors.amber
-                ),
+                    fontFamily: 'Segoe UI',
+                    fontSize: 26,
+                    // color: const Color(0xfffff2f2),
+                    color: Colors.white),
                 textAlign: TextAlign.left,
               ),
             ],

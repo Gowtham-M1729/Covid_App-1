@@ -11,18 +11,25 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            UserDetails(),
-            ReportWidget(),
-            CovidResources(),
-            MostCases(),
-            SearchWidget(),
-          ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              UserDetails(),
+              ReportWidget(),
+              CovidResources(),
+              MostCases(),
+              // SearchWidget(),
+            ],
+          ),
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        // color: Colors.black,
+        color: Color(0x10FFFFFF),
+        child: SearchWidget(),
       ),
     );
   }

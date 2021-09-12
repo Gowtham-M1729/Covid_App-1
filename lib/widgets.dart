@@ -36,11 +36,11 @@ class MostCases extends StatelessWidget {
               height: 298.0,
               child: ListView(
                 children: [
-                  CountryTile(),
-                  CountryTile(),
-                  CountryTile(),
-                  CountryTile(),
-                  CountryTile(),
+                  CountryTile(countryName: 'Country 1'),
+                  CountryTile(countryName: 'Country 2'),
+                  CountryTile(countryName: 'Country 3'),
+                  CountryTile(countryName: 'Country 4'),
+                  CountryTile(countryName: 'Country 5'),
                 ],
               ),
             ),
@@ -52,9 +52,10 @@ class MostCases extends StatelessWidget {
 }
 
 class CountryTile extends StatelessWidget {
-  const CountryTile({
-    Key? key,
-  }) : super(key: key);
+
+  final String countryName;
+
+  CountryTile({required this.countryName});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class CountryTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Country 1',
+                '$countryName',
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
                   fontSize: 20,

@@ -32,63 +32,15 @@ class MostCases extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-              height: 305.0,
+              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+              height: 298.0,
               child: ListView(
                 children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: const Color(0xffaf81dc),
-                      ),
-                      child: CountryTile(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: const Color(0xffaf81dc),
-                    ),
-                    child: CountryTile(),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: const Color(0xffaf81dc),
-                    ),
-                    child: CountryTile(),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: const Color(0xffaf81dc),
-                    ),
-                    child: CountryTile(),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: const Color(0xffaf81dc),
-                    ),
-                    child: CountryTile(),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                  CountryTile(),
+                  CountryTile(),
+                  CountryTile(),
+                  CountryTile(),
+                  CountryTile(),
                 ],
               ),
             ),
@@ -106,23 +58,47 @@ class CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Country 1',
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 20,
-              color: const Color(0xff020000),
-            ),
-            textAlign: TextAlign.left,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(countryCases());
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.0),
+          color: const Color(0xffaf81dc),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Country 1',
+                style: TextStyle(
+                  fontFamily: 'Segoe UI',
+                  fontSize: 20,
+                  color: const Color(0xff020000),
+                ),
+                textAlign: TextAlign.left,
+              ),
+              Icon(Icons.arrow_forward_ios_outlined, size: 25.0)
+            ],
           ),
-          Icon(Icons.arrow_forward_ios_outlined, size: 25.0)
-        ],
+        ),
       ),
+    );
+  }
+
+  Route countryCases() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryanimation) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color(0xffaf81dc),
+          ),
+        );
+      },
     );
   }
 }
@@ -238,7 +214,7 @@ class SearchWidget extends StatelessWidget {
             children: [
               Icon(
                 Icons.search,
-                color: Colors.amber,
+                color: Colors.white,
                 size: 35,
               ),
               Text(
@@ -247,7 +223,7 @@ class SearchWidget extends StatelessWidget {
                     fontFamily: 'Segoe UI',
                     fontSize: 26,
                     // color: const Color(0xfffff2f2),
-                    color: Colors.amber),
+                    color: Colors.white),
                 textAlign: TextAlign.left,
               ),
             ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'mainscreen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'countrydetails.dart';
+// import 'countrydetails.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,8 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xFFC8AED1),
-        // body: MainScreen(),
-        body: CountryDetails(),
+        body: MainScreen(),
       ),
     );
   }

@@ -27,8 +27,6 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        // color: Colors.black,
-        color: Color(0x10FFFFFF),
         child: SearchWidget(),
       ),
     );

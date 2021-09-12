@@ -10,8 +10,8 @@ class MostCases extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 12.0),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 12.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(19.0),
@@ -123,14 +123,15 @@ class CovidResources extends StatelessWidget {
     return GestureDetector(
       onTap: _launchURL,
       child: Container(
-        width: 350.0,
-        padding: EdgeInsets.fromLTRB(70.0, 25.0, 70.0, 25.0),
+        // width: 350.0,
+        margin: EdgeInsets.only(left: 15.0,right: 15.0),
+        padding: EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 25.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17.0),
           color: const Color(0xff8f7ae2),
         ),
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'COVID RESOURCES',

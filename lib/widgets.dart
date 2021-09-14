@@ -108,7 +108,7 @@ class MostCases extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
               height: 298.0,
-              child: ListView(
+              child: Column(
                 children: [
                   CountryTile(countryName: 'Country 1'),
                   CountryTile(countryName: 'Country 2'),

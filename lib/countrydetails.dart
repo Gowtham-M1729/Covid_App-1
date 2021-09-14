@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'widgets.dart';
+
+import 'globalcases.dart';
 
 class CountryDetails extends StatelessWidget {
-  String countryName = '';
+  final String countryName;
 
   CountryDetails({required this.countryName});
 
@@ -36,26 +37,18 @@ class CountryDetails extends StatelessWidget {
             ),
             Row(
               children: [
-                SizedBox(
-                  width: 20.0,
-                ),
+                SizedBox(width: 20.0),
                 CasesOverview(),
-                SizedBox(
-                  width: 20.0,
-                ),
+                SizedBox(width: 20.0),
                 CasesOverview(),
-                SizedBox(
-                  width: 20.0,
-                ),
+                SizedBox(width: 20.0),
                 CasesOverview(),
               ],
             ),
             ReportWidget(),
             Row(
               children: [
-                SizedBox(
-                  width: 10.0,
-                ),
+                SizedBox(width: 10.0),
                 Container(
                   padding: EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
@@ -72,9 +65,7 @@ class CountryDetails extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                SizedBox(
-                  width: 10.0,
-                ),
+                SizedBox(width: 10.0),
                 Container(
                   padding: EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
@@ -93,9 +84,7 @@ class CountryDetails extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              width: 10.0,
-            )
+            SizedBox(width: 10.0)
           ],
         ),
       ),

@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
         color: Color(0xFFC8AED1),
       supportedLocales: [
         Locale('en'),

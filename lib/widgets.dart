@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'countrydetails.dart';
+
 class MostCases extends StatelessWidget {
   const MostCases({
     Key? key,
@@ -52,7 +54,6 @@ class MostCases extends StatelessWidget {
 }
 
 class CountryTile extends StatelessWidget {
-
   final String countryName;
 
   CountryTile({required this.countryName});
@@ -95,9 +96,7 @@ class CountryTile extends StatelessWidget {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryanimation) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xffaf81dc),
-          ),
+          body: CountryDetails(countryName: countryName),
         );
       },
     );
@@ -124,7 +123,7 @@ class CovidResources extends StatelessWidget {
       onTap: _launchURL,
       child: Container(
         // width: 350.0,
-        margin: EdgeInsets.only(left: 15.0,right: 15.0),
+        margin: EdgeInsets.only(left: 15.0, right: 15.0),
         padding: EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 25.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17.0),
@@ -179,25 +178,40 @@ class UserDetails extends StatelessWidget {
   }
 }
 
-class SearchWidget extends StatelessWidget {
-  // String countryName = '';
-  // const SearchWidget({
-  //   Key? key,
-  // }) : super(key: key);
+class SearchWidget extends StatefulWidget {
+  @override
+  _SearchWidgetState createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  bool tapped = false;
+  String countryName = '';
+
+  void route() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return CountryDetails(countryName: countryName);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           showCountryPicker(
             context: context,
+            onClosed: route,
             onSelect: (Country country) {
-              // countryName = country.name;
-              print(country.name);
+              countryName = country.name;
+              print(countryName);
             },
             countryListTheme: CountryListThemeData(
+              textStyle: TextStyle(color: Colors.white),
               backgroundColor: Color(0xff6A3785),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40.0),

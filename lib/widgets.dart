@@ -3,11 +3,85 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MostCases extends StatelessWidget {
-  const MostCases({
+import 'countrydetails.dart';
+
+class UserDetails extends StatelessWidget {
+  const UserDetails({
     Key? key,
   }) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      textBaseline: TextBaseline.alphabetic,
+      children: [
+        Icon(Icons.person, size: 35.0),
+        SizedBox(
+          width: 5.0,
+        ),
+        Text(
+          'Hello James,',
+          style: TextStyle(
+            fontFamily: 'Segoe UI',
+            fontSize: 27,
+            color: const Color(0xff000000),
+            fontWeight: FontWeight.w700,
+          ),
+          textAlign: TextAlign.left,
+        ),
+      ],
+    );
+  }
+}
+
+class CovidResources extends StatelessWidget {
+  const CovidResources({
+    Key? key,
+  }) : super(key: key);
+
+  _launchURL() async {
+    const url = 'https://www.covidresourcesindia.com/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _launchURL,
+      child: Container(
+        // width: 350.0,
+        margin: EdgeInsets.only(left: 15.0, right: 15.0),
+        padding: EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 25.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(17.0),
+          color: const Color(0xff8f7ae2),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'COVID RESOURCES',
+              style: TextStyle(
+                fontFamily: 'Segoe UI',
+                fontSize: 20,
+                color: const Color(0xfffff0f0),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Icon(Icons.double_arrow_outlined, size: 30.0)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MostCases extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +108,7 @@ class MostCases extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
               height: 298.0,
-              child: ListView(
+              child: Column(
                 children: [
                   CountryTile(countryName: 'Country 1'),
                   CountryTile(countryName: 'Country 2'),
@@ -52,7 +126,6 @@ class MostCases extends StatelessWidget {
 }
 
 class CountryTile extends StatelessWidget {
-
   final String countryName;
 
   CountryTile({required this.countryName});
@@ -95,109 +168,47 @@ class CountryTile extends StatelessWidget {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryanimation) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xffaf81dc),
-          ),
+          body: CountryDetails(countryName: countryName),
         );
       },
     );
   }
 }
 
-class CovidResources extends StatelessWidget {
-  const CovidResources({
-    Key? key,
-  }) : super(key: key);
-
-  _launchURL() async {
-    const url = 'https://www.covidresourcesindia.com/';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
+class SearchWidget extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _launchURL,
-      child: Container(
-        // width: 350.0,
-        margin: EdgeInsets.only(left: 15.0,right: 15.0),
-        padding: EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 25.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(17.0),
-          color: const Color(0xff8f7ae2),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'COVID RESOURCES',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 20,
-                color: const Color(0xfffff0f0),
-              ),
-              textAlign: TextAlign.left,
-            ),
-            Icon(Icons.double_arrow_outlined, size: 30.0)
-          ],
-        ),
+  _SearchWidgetState createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  bool tapped = false;
+  String countryName = '';
+
+  void route() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return CountryDetails(countryName: countryName);
+        },
       ),
     );
   }
-}
-
-class UserDetails extends StatelessWidget {
-  const UserDetails({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      textBaseline: TextBaseline.alphabetic,
-      children: [
-        Icon(Icons.person, size: 35.0),
-        SizedBox(
-          width: 5.0,
-        ),
-        Text(
-          'Hello James,',
-          style: TextStyle(
-            fontFamily: 'Segoe UI',
-            fontSize: 27,
-            color: const Color(0xff000000),
-            fontWeight: FontWeight.w700,
-          ),
-          textAlign: TextAlign.left,
-        ),
-      ],
-    );
-  }
-}
-
-class SearchWidget extends StatelessWidget {
-  // String countryName = '';
-  // const SearchWidget({
-  //   Key? key,
-  // }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           showCountryPicker(
             context: context,
+            onClosed: route,
             onSelect: (Country country) {
-              // countryName = country.name;
-              print(country.name);
+              countryName = country.name;
+              print(countryName);
             },
             countryListTheme: CountryListThemeData(
+              textStyle: TextStyle(color: Colors.white),
               backgroundColor: Color(0xff6A3785),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40.0),
@@ -232,89 +243,6 @@ class SearchWidget extends StatelessWidget {
           )
         ]),
       ),
-    );
-  }
-}
-
-class ReportWidget extends StatelessWidget {
-  const ReportWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Container(
-        padding: EdgeInsets.all(30.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: const Color(0xff462456),
-        ),
-        child: Column(
-          children: [
-            Text(
-              'GLOBAL CASES',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 27,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            DetailsWidget(),
-            SizedBox(
-              height: 10.0,
-            ),
-            DetailsWidget(),
-            SizedBox(
-              height: 10.0,
-            ),
-            DetailsWidget(),
-            SizedBox(
-              height: 30.0,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DetailsWidget extends StatelessWidget {
-  const DetailsWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          'Active Cases',
-          style: TextStyle(
-            fontFamily: 'Segoe UI',
-            fontSize: 20,
-            color: const Color(0xffffffff),
-          ),
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(
-          width: 110.0,
-        ),
-        Text(
-          '123123',
-          style: TextStyle(
-            fontFamily: 'Segoe UI',
-            fontSize: 20,
-            color: const Color(0xffffffff),
-          ),
-          textAlign: TextAlign.left,
-        )
-      ],
     );
   }
 }

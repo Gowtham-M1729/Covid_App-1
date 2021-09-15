@@ -1,6 +1,8 @@
 import 'widgets.dart';
 import 'package:flutter/material.dart';
 
+import 'globalcases.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -21,14 +23,11 @@ class _MainScreenState extends State<MainScreen> {
               ReportWidget(),
               CovidResources(),
               MostCases(),
-              // SearchWidget(),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        // color: Colors.black,
-
         child: SearchWidget(),
       ),
     );

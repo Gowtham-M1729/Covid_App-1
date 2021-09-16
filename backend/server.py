@@ -1,5 +1,4 @@
 from flask import Flask, send_file, jsonify
-from flask_restful import Api, Resource, abort, marshal_with, fields, reqparse
 from flask_sqlalchemy import SQLAlchemy, inspect
 import requests
 import json
@@ -36,19 +35,6 @@ class DataModel(db.Model):
         return {c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs}
 
 
-resource_fields = {
-    'iso2': fields.String,
-    'country': fields.String,
-    'slug': fields.String,
-    'newConfirmed': fields.Integer,
-    'totalConfirmed': fields.Integer,
-    'totalDaeths': fields.Integer,
-    'newDeaths': fields.Integer,
-    'totalRecovered': fields.Integer,
-    'newRecovered': fields.Integer,
-    'active': fields.Integer
-
-}
 
 
 def updateDatabase():

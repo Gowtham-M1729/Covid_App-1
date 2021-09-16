@@ -83,6 +83,43 @@ def reset():
     db.create_all()
     return "Done"
 
+# routes
+
+
+@app.route('/country')
+def index():
+    try:
+        socks = DataModel.query.filter_by(
+            iso2='IN').order_by(DataModel.country).all()
+        sock_text = '<ul>'
+        for sock in socks:
+            sock_text += '<li>' + sock.country + \
+                ', ' + str(sock.active) + '</li>'
+        sock_text += '</ul>'
+        return sock_text
+    except Exception as e:
+        # e holds description of the error
+        error_text = "<p>The error:<br>" + str(e) + "</p>"
+        hed = '<h1>Something is broken.</h1>'
+        return hed + error_text
+
+
+@app.route('/')
+def countryinfo():
+    try:
+        socks = DataModel.query.order_by(DataModel.country).all()
+        sock_text = '<ul>'
+        for sock in socks:
+            sock_text += '<li>' + sock.country + \
+                ', ' + str(sock.active) + '</li>'
+        sock_text += '</ul>'
+        return sock_text
+    except Exception as e:
+        # e holds description of the error
+        error_text = "<p>The error:<br>" + str(e) + "</p>"
+        hed = '<h1>Something is broken.</h1>'
+        return hed + error_text
+
 
 if __name__ == "__main__":
 

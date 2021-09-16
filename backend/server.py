@@ -109,13 +109,13 @@ if __name__ == "__main__":
 
     db.create_all()
 
-    # thread = threading.Thread(target=updateDatabase)
-    # thread.start()
+    thread = threading.Thread(target=updateDatabase)
+    thread.start()
 
-    # scheduler = BackgroundScheduler()
-    # scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
-    # scheduler.start()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
+    scheduler.start()
 
     app.run(debug=True, use_reloader=False,
             port=os.getenv("PORT"), host="0.0.0.0")
-    #atexit.register(lambda: scheduler.shutdown())
+    atexit.register(lambda: scheduler.shutdown())

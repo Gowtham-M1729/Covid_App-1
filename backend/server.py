@@ -60,7 +60,7 @@ def updateDatabase():
 
         print("Updated " + country)
         db.session.commit()
-        # time.sleep(1)
+        time.sleep(1)
 
     print("Update complete ...")
 

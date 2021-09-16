@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy, inspect
 import requests
 import json
 import threading
+from requests.sessions import session
 import schedule
 import time
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -41,7 +42,7 @@ def updateDatabase():
     lst_countrysummary = (requests.get(
         "https://api.covid19api.com/summary")).json()
     lst = lst_countrysummary["Countries"]
-    countries = sorted(lst, key=lambda c: c["NewConfirmed"])
+    #countries = sorted(lst, key=lambda c: c["NewConfirmed"])
     globaldata = lst_countrysummary['Global']
 
     for i in lst:
@@ -59,7 +60,7 @@ def updateDatabase():
 
         print("Updated " + country)
         db.session.commit()
-        time.sleep(1)
+        # time.sleep(1)
 
     print("Update complete ...")
 
@@ -71,7 +72,19 @@ def reset():
     return "Done"
 
 
-@app.route('/i')
+@app.route('/countryList')
+def countrylist():
+    try:
+        lst = []
+        result = list(DataModel.query.with_entities(DataModel.country))
+        for i in result:
+            lst.append(i[0])
+        return json.dumps(lst)
+    except Exception as e:
+        return str(e)
+
+
+@app.route('/country')
 def index():
     try:
         data = DataModel.query.all()
@@ -80,17 +93,29 @@ def index():
         return str(e)
 
 
+@app.route('/country/<string:name>')
+def countryinfo(name):
+    try:
+        data = DataModel.query.all()
+        lst = [x.dict() for x in data]
+        for i in lst:
+            if i['country'] == name:
+                return jsonify(i)
+    except:
+        return jsonify({'message': 'store not found'})
+
+
 if __name__ == "__main__":
 
     db.create_all()
 
-    thread = threading.Thread(target=updateDatabase)
-    thread.start()
+    # thread = threading.Thread(target=updateDatabase)
+    # thread.start()
 
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
-    scheduler.start()
+    # scheduler = BackgroundScheduler()
+    # scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
+    # scheduler.start()
 
     app.run(debug=True, use_reloader=False,
             port=os.getenv("PORT"), host="0.0.0.0")
-    atexit.register(lambda: scheduler.shutdown())
+    #atexit.register(lambda: scheduler.shutdown())

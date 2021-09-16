@@ -51,6 +51,7 @@ def updateDatabase():
          date) = i['Country'], i['CountryCode'], i['Slug'], i['NewConfirmed'], i['TotalConfirmed'], i['NewDeaths'], i['TotalDeaths'], i['NewRecovered'], i['TotalRecovered'], i['Date']
 
         countries_info = requests.get(BASE + countrycode).json()
+        print(countries_info)
         activeCases = countries_info[-1]['Active'] - \
             countries_info[-2]['Active']
 
@@ -75,15 +76,9 @@ def reset():
 def index():
     try:
         data = DataModel.query.all()
-        print(data)
-        # return ",".join([str(x) for x in data])
         return jsonify([x.dict() for x in data])
-        for d in data:
-            print(d.json())
     except Exception as e:
-        print(e)
-        pass
-    return data
+        return str(e)
 
 
 if __name__ == "__main__":

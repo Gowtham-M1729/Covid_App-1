@@ -79,7 +79,7 @@ def countrylist():
         result = list(DataModel.query.with_entities(DataModel.country))
         for i in result:
             lst.append(i[0])
-        return json.dumps(lst)
+        return jsonify(lst)
     except Exception as e:
         return str(e)
 

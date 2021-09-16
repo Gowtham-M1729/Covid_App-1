@@ -1,9 +1,8 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, jsonify
 from flask_restful import Api, Resource, abort, marshal_with, fields, reqparse
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, inspect
 import requests
 import json
-import matplotlib.pyplot as plt
 import threading
 import schedule
 import time
@@ -31,7 +30,10 @@ class DataModel(db.Model):
     active = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f"Data(name = {country},iso2={iso2},slug={slug} ,newconfiremd = {newConfirmed}, newdeaths = {newDeaths}, newrecovered = {newRecovered},totalconfirmed={totalConfirmed},totalrecovered={totalRecovered},totaldeaths={totalDeaths},active = {active})"
+        return f"Data(name = {self.country},iso2={self.iso2},slug={self.slug} ,newconfiremd = {self.newConfirmed}, newdeaths = {self.newDeaths}, newrecovered = {self.newRecovered},totalconfirmed={self.totalConfirmed},totalrecovered={self.totalRecovered},totaldeaths={self.totalDeaths},active = {self.active})"
+
+    def dict(self):
+        return {c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs}
 
 
 resource_fields = {
@@ -83,55 +85,33 @@ def reset():
     db.create_all()
     return "Done"
 
-# routes
 
-
-@app.route('/country')
+@app.route('/i')
 def index():
     try:
-        socks = DataModel.query.filter_by(
-            iso2='IN').order_by(DataModel.country).all()
-        sock_text = '<ul>'
-        for sock in socks:
-            sock_text += '<li>' + sock.country + \
-                ', ' + str(sock.active) + '</li>'
-        sock_text += '</ul>'
-        return sock_text
+        data = DataModel.query.all()
+        print(data)
+        # return ",".join([str(x) for x in data])
+        return jsonify([x.dict() for x in data])
+        for d in data:
+            print(d.json())
     except Exception as e:
-        # e holds description of the error
-        error_text = "<p>The error:<br>" + str(e) + "</p>"
-        hed = '<h1>Something is broken.</h1>'
-        return hed + error_text
-
-
-@app.route('/')
-def countryinfo():
-    try:
-        socks = DataModel.query.order_by(DataModel.country).all()
-        sock_text = '<ul>'
-        for sock in socks:
-            sock_text += '<li>' + sock.country + \
-                ', ' + str(sock.active) + '</li>'
-        sock_text += '</ul>'
-        return sock_text
-    except Exception as e:
-        # e holds description of the error
-        error_text = "<p>The error:<br>" + str(e) + "</p>"
-        hed = '<h1>Something is broken.</h1>'
-        return hed + error_text
+        print(e)
+        pass
+    return data
 
 
 if __name__ == "__main__":
 
     db.create_all()
 
-    thread = threading.Thread(target=updateDatabase)
-    thread.start()
+    #thread = threading.Thread(target=updateDatabase)
+    # thread.start()
 
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
-    scheduler.start()
+    #scheduler = BackgroundScheduler()
+    #scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
+    # scheduler.start()
 
     app.run(debug=True, use_reloader=False,
             port=os.getenv("PORT"), host="0.0.0.0")
-    atexit.register(lambda: scheduler.shutdown())
+    #atexit.register(lambda: scheduler.shutdown())

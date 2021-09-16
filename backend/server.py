@@ -51,7 +51,7 @@ def updateDatabase():
          date) = i['Country'], i['CountryCode'], i['Slug'], i['NewConfirmed'], i['TotalConfirmed'], i['NewDeaths'], i['TotalDeaths'], i['NewRecovered'], i['TotalRecovered'], i['Date']
 
         countries_info = requests.get(BASE + countrycode).json()
-        print(countries_info)
+        #print(countries_info)
         activeCases = countries_info[-1]['Active'] - \
             countries_info[-2]['Active']
 
@@ -61,6 +61,7 @@ def updateDatabase():
 
         print("Updated " + country)
         db.session.commit()
+        time.sleep(1)
 
     print("Update complete ...")
 

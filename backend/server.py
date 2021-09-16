@@ -1,5 +1,4 @@
 from flask import Flask, send_file, jsonify
-from flask_restful import Api, Resource, abort, marshal_with, fields, reqparse
 from flask_sqlalchemy import SQLAlchemy, inspect
 import requests
 import json
@@ -11,7 +10,6 @@ import atexit
 import os
 
 app = Flask(__name__)
-api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
@@ -36,21 +34,6 @@ class DataModel(db.Model):
         return {c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs}
 
 
-resource_fields = {
-    'iso2': fields.String,
-    'country': fields.String,
-    'slug': fields.String,
-    'newConfirmed': fields.Integer,
-    'totalConfirmed': fields.Integer,
-    'totalDaeths': fields.Integer,
-    'newDeaths': fields.Integer,
-    'totalRecovered': fields.Integer,
-    'newRecovered': fields.Integer,
-    'active': fields.Integer
-
-}
-
-
 def updateDatabase():
 
     print("Updating database ....")
@@ -66,6 +49,7 @@ def updateDatabase():
          date) = i['Country'], i['CountryCode'], i['Slug'], i['NewConfirmed'], i['TotalConfirmed'], i['NewDeaths'], i['TotalDeaths'], i['NewRecovered'], i['TotalRecovered'], i['Date']
 
         countries_info = requests.get(BASE + countrycode).json()
+        # print(countries_info)
         activeCases = countries_info[-1]['Active'] - \
             countries_info[-2]['Active']
 
@@ -75,6 +59,7 @@ def updateDatabase():
 
         print("Updated " + country)
         db.session.commit()
+        time.sleep(1)
 
     print("Update complete ...")
 
@@ -90,28 +75,22 @@ def reset():
 def index():
     try:
         data = DataModel.query.all()
-        print(data)
-        # return ",".join([str(x) for x in data])
         return jsonify([x.dict() for x in data])
-        for d in data:
-            print(d.json())
     except Exception as e:
-        print(e)
-        pass
-    return data
+        return str(e)
 
 
 if __name__ == "__main__":
 
     db.create_all()
 
-    #thread = threading.Thread(target=updateDatabase)
-    # thread.start()
+    thread = threading.Thread(target=updateDatabase)
+    thread.start()
 
-    #scheduler = BackgroundScheduler()
-    #scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
-    # scheduler.start()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(func=updateDatabase, trigger="interval", days=1)
+    scheduler.start()
 
     app.run(debug=True, use_reloader=False,
             port=os.getenv("PORT"), host="0.0.0.0")
-    #atexit.register(lambda: scheduler.shutdown())
+    atexit.register(lambda: scheduler.shutdown())

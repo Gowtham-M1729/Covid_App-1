@@ -81,7 +81,6 @@ class CovidResources extends StatelessWidget {
 }
 
 class MostCases extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -168,7 +167,12 @@ class CountryTile extends StatelessWidget {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryanimation) {
         return Scaffold(
-          body: CountryDetails(countryName: countryName),
+          body: CountryDetails(
+            countryName: countryName,
+            // activeCases: '',
+            // newConfirmedCases: '',
+            // newDeaths: '',
+          ),
         );
       },
     );
@@ -182,14 +186,19 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   bool tapped = false;
-  String countryName = '';
+  String countryName = "";
 
   void route() {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) {
-          return CountryDetails(countryName: countryName);
+          return CountryDetails(
+            countryName: countryName,
+            // activeCases: '',
+            // newConfirmedCases: '',
+            // newDeaths: '',
+          );
         },
       ),
     );

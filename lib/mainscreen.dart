@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               UserDetails(),
-              ReportWidget(),
+              ReportWidget(text: 'GLOBAL CASES', totalConfirmedCases: '', totalDeathCases: '', totalRecovered: '',),
               CovidResources(),
               MostCases(),
             ],

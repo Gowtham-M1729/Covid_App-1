@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ReportWidget extends StatelessWidget {
+  final String text;
+  final String totalConfirmedCases;
+  final String totalDeathCases;
+  final String totalRecovered;
+  ReportWidget({
+    required this.text,
+    required this.totalConfirmedCases,
+    required this.totalDeathCases,
+    required this.totalRecovered,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +25,7 @@ class ReportWidget extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'GLOBAL CASES',
+              '$text',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 27,
@@ -24,9 +34,9 @@ class ReportWidget extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             SizedBox(height: 20.0),
-            DetailsWidget(),
-            DetailsWidget(),
-            DetailsWidget(),
+            DetailsWidget(text: 'Confirmed',data: totalConfirmedCases),
+            DetailsWidget(text: 'Deaths', data: totalDeathCases),
+            DetailsWidget(text: 'Recovered', data: totalRecovered),
             SizedBox(height: 20.0),
           ],
         ),
@@ -36,6 +46,12 @@ class ReportWidget extends StatelessWidget {
 }
 
 class DetailsWidget extends StatelessWidget {
+  final String text;
+  final String data;
+  DetailsWidget({
+    required this.text,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +63,7 @@ class DetailsWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 15.0),
             child: Text(
-              'Active Cases',
+              '$text',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 20,
@@ -59,7 +75,7 @@ class DetailsWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 15.0),
             child: Text(
-              '123123',
+              '$data',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 20,

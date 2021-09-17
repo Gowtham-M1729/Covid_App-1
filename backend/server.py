@@ -96,13 +96,10 @@ def index():
 @app.route('/country/<string:name>')
 def countryinfo(name):
     try:
-        data = DataModel.query.all()
-        lst = [x.dict() for x in data]
-        for i in lst:
-            if i['country'] == name:
-                return jsonify(i)
+        data = DataModel.query.filter(DataModel.country == name).first()
+        return(jsonify(data.dict()))
     except:
-        return jsonify({'message': 'store not found'})
+        return jsonify({'message': 'Country info not found'})
 
 
 if __name__ == "__main__":
@@ -118,4 +115,4 @@ if __name__ == "__main__":
 
     app.run(debug=True, use_reloader=False,
             port=os.getenv("PORT"), host="0.0.0.0")
-    atexit.register(lambda: scheduler.shutdown())
+    #atexit.register(lambda: scheduler.shutdown())

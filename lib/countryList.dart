@@ -52,8 +52,8 @@ class _CountriesListState extends State<CountriesList> {
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0xff66466E),
-                      ),
+                          //color: Color(0xff66466E),
+                          ),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -63,9 +63,10 @@ class _CountriesListState extends State<CountriesList> {
                   ),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      backgroundColor: Colors.white),
+                    color: Colors.white54,
+                    fontSize: 20.0,
+                    //backgroundColor: Colors.white,
+                  ),
                 ),
                 width: 374,
                 height: 44,

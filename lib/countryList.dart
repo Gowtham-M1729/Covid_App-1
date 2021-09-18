@@ -41,21 +41,23 @@ class _CountriesListState extends State<CountriesList> {
   }
 
   void runFilter(String enteredKeyword) {
-    setState(() {
-      results.clear();
-      if (enteredKeyword.isEmpty) {
-        results = List.from(countries);
-      } else {
-        for (int i = 0; i < countries.length; ++i) {
-          String data = countries[i];
-          if (data.toLowerCase().contains(enteredKeyword.toLowerCase())) {
-            if (results.contains(data) == false) {
-              results.add(data);
-            }
+    results.clear();
+    if (enteredKeyword.isEmpty) {
+      results = List.from(countries);
+    } else {
+      for (int i = 0; i < countries.length; ++i) {
+        String data = countries[i];
+        if (data.toLowerCase().contains(enteredKeyword.toLowerCase())) {
+          if (results.contains(data) == false) {
+            results.add(data);
           }
         }
-        print(results);
       }
+      print(results);
+    }
+
+    setState(() {
+      results = List.from(results);
     });
   }
 
@@ -74,12 +76,23 @@ class _CountriesListState extends State<CountriesList> {
               children: [
                 Container(
                   child: TextField(
+                    cursorColor: Colors.white10,
                     onChanged: (newText) {
                       enteredText = newText;
                       // print(enteredText);
                       runFilter(enteredText);
                     },
                     decoration: InputDecoration(
+                      hintText: 'Search Countries',
+                      hintStyle: TextStyle(
+                        color:
+                            Color.fromRGBO(255, 255, 255, 0.30000001192092896),
+                        fontFamily: 'Roboto',
+                        fontSize: 22,
+                        letterSpacing: 0,
+                        fontWeight: FontWeight.normal,
+                        height: 1,
+                      ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xff66466E),
@@ -110,7 +123,10 @@ class _CountriesListState extends State<CountriesList> {
                     color: Color.fromRGBO(64, 22, 75, 1),
                   ),
                 ),
-                Icon(Icons.search),
+                Icon(
+                  Icons.search,
+                  color: Colors.white38,
+                ),
               ],
             ),
           ),
@@ -118,7 +134,9 @@ class _CountriesListState extends State<CountriesList> {
         backgroundColor: Color(0xff66466E),
         body: (loading)
             ? Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.purple,
+                ),
               )
             : ((countries.length > 0)
                 ? Padding(
@@ -135,37 +153,45 @@ class _CountriesListState extends State<CountriesList> {
                       ),
                       padding: EdgeInsets.all(20.0),
                       //color: Colors.purple,
-                      child: ListView.separated(
-                        addRepaintBoundaries: false,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(height: 10);
-                        },
-                        itemBuilder: (context, index) {
-                          String listdata = results[index];
-                          return // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                              Container(
-                            width: 348,
-                            height: 62,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                              ),
-                              color: Color.fromRGBO(102, 70, 110, 1),
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                listdata,
-                                style: TextStyle(color: Colors.white38),
-                              ),
-                              //tileColor: Colors.blue[100],
-                              trailing: Icon(Icons.arrow_forward_ios),
-                            ),
-                          );
-                        },
-                        itemCount: results.length,
+                      child: ScrollConfiguration(
+                        behavior: ScrollBehavior(),
+                        child: GlowingOverscrollIndicator(
+                          axisDirection: AxisDirection.down,
+                          color: Colors.purple,
+                          child: ListView.separated(
+                            addRepaintBoundaries: false,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(height: 10);
+                            },
+                            itemBuilder: (context, index) {
+                              String listdata = results[index];
+                              return // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                                  Container(
+                                width: 348,
+                                height: 62,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  ),
+                                  color: Color.fromRGBO(102, 70, 110, 1),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    results[index],
+                                    style: TextStyle(color: Colors.white38),
+                                  ),
+                                  //tileColor: Colors.blue[100],
+                                  trailing: Icon(Icons.arrow_forward_ios),
+                                ),
+                              );
+                            },
+                            itemCount: results.length,
+                          ),
+                        ),
                       ),
                     ),
                   )
@@ -176,3 +202,5 @@ class _CountriesListState extends State<CountriesList> {
     );
   }
 }
+
+      // Figma Flutter Generator SearchcountryWidget - TEXT

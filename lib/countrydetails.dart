@@ -24,6 +24,7 @@ class CountryDetails extends StatefulWidget {
 }
 
 class _CountryDetailsState extends State<CountryDetails> {
+  bool loading = true;
   String countryName = "";
   String activeCases = "NA";
   String newConfirmedCases = "NA";
@@ -49,6 +50,7 @@ class _CountryDetailsState extends State<CountryDetails> {
       totalDeathCases = data['totalDeaths'].toString();
       totalRecovered =
           (data['totalConfirmed'] - data['totalDeaths']).toString();
+      loading = false;
     });
   }
 
@@ -75,76 +77,83 @@ class _CountryDetailsState extends State<CountryDetails> {
           textAlign: TextAlign.left,
         ),
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                child: Image.asset(
-                  'assets/image1.png',
-                  height: 180.0,
-                  width: 250.0,
+      body: (loading)
+          ? Center(
+              child: CircularProgressIndicator(
+                color: Colors.purple,
+              ),
+            )
+          : SingleChildScrollView(
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      child: Image.asset(
+                        'assets/image1.png',
+                        height: 180.0,
+                        width: 250.0,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CasesOverview(text: "Active", data: "$activeCases"),
+                        SizedBox(width: 15.0),
+                        CasesOverview(
+                            text: "Confirmed", data: "$newConfirmedCases"),
+                        SizedBox(width: 15.0),
+                        CasesOverview(text: "Deaths", data: "$newDeaths"),
+                      ],
+                    ),
+                    ReportWidget(
+                      text: 'TOTAL CASES',
+                      totalConfirmedCases: '$totalConfirmedCases',
+                      totalDeathCases: '$totalDeathCases',
+                      totalRecovered: '$totalRecovered',
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(17.0),
+                            color: const Color(0xff8f7ae2),
+                          ),
+                          child: Text(
+                            'Call Helpline',
+                            style: TextStyle(
+                              fontFamily: 'Segoe UI',
+                              fontSize: 27,
+                              color: const Color(0xffffffff),
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        SizedBox(width: 20.0),
+                        Container(
+                          padding: EdgeInsets.all(15.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(17.0),
+                            color: const Color(0xff8f7ae2),
+                          ),
+                          child: Text(
+                            'Call Helpline',
+                            style: TextStyle(
+                              fontFamily: 'Segoe UI',
+                              fontSize: 27,
+                              color: const Color(0xffffffff),
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CasesOverview(text: "Active", data: "$activeCases"),
-                  SizedBox(width: 15.0),
-                  CasesOverview(text: "Confirmed", data: "$newConfirmedCases"),
-                  SizedBox(width: 15.0),
-                  CasesOverview(text: "Deaths", data: "$newDeaths"),
-                ],
-              ),
-              ReportWidget(
-                text: 'TOTAL CASES',
-                totalConfirmedCases: '$totalConfirmedCases',
-                totalDeathCases: '$totalDeathCases',
-                totalRecovered: '$totalRecovered',
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(17.0),
-                      color: const Color(0xff8f7ae2),
-                    ),
-                    child: Text(
-                      'Call Helpline',
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 27,
-                        color: const Color(0xffffffff),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  SizedBox(width: 20.0),
-                  Container(
-                    padding: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(17.0),
-                      color: const Color(0xff8f7ae2),
-                    ),
-                    child: Text(
-                      'Call Helpline',
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 27,
-                        color: const Color(0xffffffff),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

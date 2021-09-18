@@ -2,7 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'countryList.dart';
 import 'countrydetails.dart';
 
 class UserDetails extends StatelessWidget {
@@ -209,20 +209,12 @@ class _SearchWidgetState extends State<SearchWidget> {
     return SingleChildScrollView(
       child: GestureDetector(
         onTap: () {
-          showCountryPicker(
-            context: context,
-            onClosed: route,
-            onSelect: (Country country) {
-              countryName = country.name;
-              print(countryName);
-            },
-            countryListTheme: CountryListThemeData(
-              textStyle: TextStyle(color: Colors.white),
-              backgroundColor: Color(0xff6A3785),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return CountriesList();
+              },
             ),
           );
         },
@@ -255,3 +247,22 @@ class _SearchWidgetState extends State<SearchWidget> {
     );
   }
 }
+
+/*
+showCountryPicker(
+            context: context,
+            onClosed: route,
+            onSelect: (Country country) {
+              countryName = country.name;
+              print(countryName);
+            },
+            countryListTheme: CountryListThemeData(
+              textStyle: TextStyle(color: Colors.white),
+              backgroundColor: Color(0xff6A3785),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
+          );
+*/

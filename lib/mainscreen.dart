@@ -14,13 +14,19 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFC8AED1),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               UserDetails(),
-              ReportWidget(text: 'GLOBAL CASES', totalConfirmedCases: '', totalDeathCases: '', totalRecovered: '',),
+              ReportWidget(
+                text: 'GLOBAL CASES',
+                totalConfirmedCases: '',
+                totalDeathCases: '',
+                totalRecovered: '',
+              ),
               CovidResources(),
               MostCases(),
             ],

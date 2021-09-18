@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // backgroundColor: Color(0xFFC8AED1),
-        //body: MainScreen(),
-        body: CountriesList(),
+        backgroundColor: Color(0xFFC8AED1),
+        body: MainScreen(),
+        //body: CountriesList(),
       ),
     );
   }

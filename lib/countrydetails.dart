@@ -47,7 +47,8 @@ class _CountryDetailsState extends State<CountryDetails> {
       newDeaths = data['newDeaths'].toString();
       totalConfirmedCases = data['totalConfirmed'].toString();
       totalDeathCases = data['totalDeaths'].toString();
-      totalRecovered = (data['totalConfirmed']-data['totalDeaths']).toString();
+      totalRecovered =
+          (data['totalConfirmed'] - data['totalDeaths']).toString();
     });
   }
 
@@ -60,7 +61,7 @@ class _CountryDetailsState extends State<CountryDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFC8AED1),
       appBar: AppBar(
         backgroundColor: Color(0xffaf81dc),
         centerTitle: true,

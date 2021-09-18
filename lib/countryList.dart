@@ -12,6 +12,7 @@ class CountriesList extends StatefulWidget {
 }
 
 class _CountriesListState extends State<CountriesList> {
+  String enteredText = '';
   bool loading = true;
   List<String> countries = [];
 
@@ -51,6 +52,10 @@ class _CountriesListState extends State<CountriesList> {
               children: [
                 Container(
                   child: TextField(
+                    onChanged: (newText) {
+                      enteredText = newText;
+                      print(enteredText);
+                    },
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(

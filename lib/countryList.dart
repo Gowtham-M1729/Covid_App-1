@@ -15,6 +15,7 @@ class _CountriesListState extends State<CountriesList> {
   String enteredText = '';
   bool loading = true;
   List<String> countries = [];
+  List<String> results = [];
 
   void getCountries() async {
     var url = Uri.https('projectify-covidapp.herokuapp.com', '/countryList');
@@ -25,6 +26,7 @@ class _CountriesListState extends State<CountriesList> {
       for (var c in data) {
         countries.add(c);
       }
+      print(countries);
     }
 
     setState(() {
@@ -38,7 +40,27 @@ class _CountriesListState extends State<CountriesList> {
     getCountries();
   }
 
+  void runFilter(String enteredKeyword) {
+    setState(() {
+      results.clear();
+      if (enteredKeyword.isEmpty) {
+        results = List.from(countries);
+      } else {
+        for (int i = 0; i < countries.length; ++i) {
+          String data = countries[i];
+          if (data.toLowerCase().contains(enteredKeyword.toLowerCase())) {
+            if (results.contains(data) == false) {
+              results.add(data);
+            }
+          }
+        }
+        print(results);
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
+    results = List.from(countries);
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -54,7 +76,8 @@ class _CountriesListState extends State<CountriesList> {
                   child: TextField(
                     onChanged: (newText) {
                       enteredText = newText;
-                      print(enteredText);
+                      // print(enteredText);
+                      runFilter(enteredText);
                     },
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
@@ -118,6 +141,7 @@ class _CountriesListState extends State<CountriesList> {
                           return SizedBox(height: 10);
                         },
                         itemBuilder: (context, index) {
+                          String listdata = results[index];
                           return // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                               Container(
                             width: 348,
@@ -133,7 +157,7 @@ class _CountriesListState extends State<CountriesList> {
                             ),
                             child: ListTile(
                               title: Text(
-                                countries[index],
+                                listdata,
                                 style: TextStyle(color: Colors.white38),
                               ),
                               //tileColor: Colors.blue[100],
@@ -141,7 +165,7 @@ class _CountriesListState extends State<CountriesList> {
                             ),
                           );
                         },
-                        itemCount: countries.length,
+                        itemCount: results.length,
                       ),
                     ),
                   )

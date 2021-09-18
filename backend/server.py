@@ -1,6 +1,7 @@
 from flask import Flask, send_file, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy, inspect
 import requests
+
 import json
 import threading
 from requests.sessions import session
@@ -141,6 +142,20 @@ def countryinfo(name):
     try:
         data = DataModel.query.filter(DataModel.country == name).first()
         return(jsonify(data.dict()))
+    except:
+        return jsonify({'message': 'Country info not found'})
+
+
+@app.route('/MostCases')
+def MostCases():
+    try:
+        data = DataModel.query.order_by(DataModel.active).all()
+        l = [x.dict() for x in data][::-1]
+        mostcase = []
+        for i in range(5):
+            d = l[i]
+            mostcase.append(d["country"])
+        return jsonify(mostcase)
     except:
         return jsonify({'message': 'Country info not found'})
 

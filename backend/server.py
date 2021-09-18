@@ -103,9 +103,7 @@ def countryinfo(name):
 
 
 if __name__ == "__main__":
-
     db.create_all()
-
     thread = threading.Thread(target=updateDatabase)
     thread.start()
 

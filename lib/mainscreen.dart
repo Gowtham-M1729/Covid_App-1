@@ -60,6 +60,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Color(0xFFC8AED1),
         child: SearchWidget(),
       ),
     );

@@ -26,7 +26,7 @@ class _CountriesListState extends State<CountriesList> {
       for (var c in data) {
         countries.add(c);
       }
-      print(countries);
+      // print(countries);
     }
 
     setState(() {
@@ -62,7 +62,7 @@ class _CountriesListState extends State<CountriesList> {
   }
 
   Widget build(BuildContext context) {
-    results = List.from(countries);
+    results = List.from(results);
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -165,7 +165,6 @@ class _CountriesListState extends State<CountriesList> {
                               return SizedBox(height: 10);
                             },
                             itemBuilder: (context, index) {
-                              String listdata = results[index];
                               return // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                                   Container(
                                 width: 348,

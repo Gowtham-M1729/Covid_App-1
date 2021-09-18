@@ -19,7 +19,6 @@ class _MainScreenState extends State<MainScreen> {
 
   void getGlobalCases() async{
     String url = "https://projectify-covidapp.herokuapp.com/Global";
-    print(url);
     var response = await http.get(Uri.parse(url));
     
     Map data = {};

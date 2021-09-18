@@ -108,11 +108,11 @@ class MostCases extends StatelessWidget {
               height: 298.0,
               child: Column(
                 children: [
-                  CountryTile(countryName: 'Country 1'),
-                  CountryTile(countryName: 'Country 2'),
-                  CountryTile(countryName: 'Country 3'),
-                  CountryTile(countryName: 'Country 4'),
-                  CountryTile(countryName: 'Country 5'),
+                  CountryTile(countryName: 'United States of America'),
+                  CountryTile(countryName: 'India'),
+                  CountryTile(countryName: 'Brazil'),
+                  CountryTile(countryName: 'United Kingdom'),
+                  CountryTile(countryName: 'Russian Federation'),
                 ],
               ),
             ),
@@ -168,9 +168,6 @@ class CountryTile extends StatelessWidget {
         return Scaffold(
           body: CountryDetails(
             countryName: countryName,
-            // activeCases: '',
-            // newConfirmedCases: '',
-            // newDeaths: '',
           ),
         );
       },
@@ -194,9 +191,6 @@ class _SearchWidgetState extends State<SearchWidget> {
         builder: (context) {
           return CountryDetails(
             countryName: countryName,
-            // activeCases: '',
-            // newConfirmedCases: '',
-            // newDeaths: '',
           );
         },
       ),
@@ -246,22 +240,3 @@ class _SearchWidgetState extends State<SearchWidget> {
     );
   }
 }
-
-/*
-showCountryPicker(
-            context: context,
-            onClosed: route,
-            onSelect: (Country country) {
-              countryName = country.name;
-              print(countryName);
-            },
-            countryListTheme: CountryListThemeData(
-              textStyle: TextStyle(color: Colors.white),
-              backgroundColor: Color(0xff6A3785),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
-            ),
-          );
-*/

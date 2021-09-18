@@ -44,6 +44,7 @@ class _CountriesListState extends State<CountriesList> {
     results.clear();
     if (enteredKeyword.isEmpty) {
       results = List.from(countries);
+      print(results);
     } else {
       for (int i = 0; i < countries.length; ++i) {
         String data = countries[i];
@@ -53,7 +54,7 @@ class _CountriesListState extends State<CountriesList> {
           }
         }
       }
-      print(results);
+      // print(results);
     }
 
     setState(() {
@@ -62,7 +63,9 @@ class _CountriesListState extends State<CountriesList> {
   }
 
   Widget build(BuildContext context) {
-    results = List.from(results);
+    results.isEmpty
+        ? results = List.from(countries)
+        : results = List.from(results);
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -168,14 +171,10 @@ class _CountriesListState extends State<CountriesList> {
                               return // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                                   Container(
                                 width: 348,
-                                height: 62,
+                                height: 55,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),
-                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
                                   color: Color.fromRGBO(102, 70, 110, 1),
                                 ),
                                 child: ListTile(

@@ -2,7 +2,7 @@ import 'widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'globalcases.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,16 +17,21 @@ class _MainScreenState extends State<MainScreen> {
   String totalDeathCases = 'NA';
   String totalRecovered = 'NA';
 
-  void getGlobalCases() async{
+  void getGlobalCases() async {
     String url = "https://projectify-covidapp.herokuapp.com/Global";
     var response = await http.get(Uri.parse(url));
-    
+
     Map data = {};
     data = json.decode(response.body);
     setState(() {
-      totalConfirmedCases = data['totalConfirmed'].toString();
-      totalDeathCases = data['totalDeaths'].toString();
-      totalRecovered = (data['totalConfirmed']-data['totalDeaths']).toString();
+      totalConfirmedCases = NumberFormat.decimalPattern()
+          .format(data['totalConfirmed'])
+          .toString();
+      totalDeathCases =
+          NumberFormat.decimalPattern().format(data['totalDeaths']).toString();
+      totalRecovered = NumberFormat.decimalPattern()
+          .format((data['totalConfirmed'] - data['totalDeaths']))
+          .toString();
     });
   }
 

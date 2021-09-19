@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:intl/intl.dart';
 import 'globalcases.dart';
 
 class CountryDetails extends StatefulWidget {
@@ -42,14 +42,22 @@ class _CountryDetailsState extends State<CountryDetails> {
     Map data = {};
     data = json.decode(response.body);
     setState(() {
+      //NumberFormat.decimalPattern().format(data['totalConfirmed'] - data['totalDeaths'])
       countryName = widget.countryName;
-      activeCases = data['active'].toString();
-      newConfirmedCases = data['newConfirmed'].toString();
-      newDeaths = data['newDeaths'].toString();
-      totalConfirmedCases = data['totalConfirmed'].toString();
-      totalDeathCases = data['totalDeaths'].toString();
-      totalRecovered =
-          (data['totalConfirmed'] - data['totalDeaths']).toString();
+      activeCases =
+          NumberFormat.decimalPattern().format(data['active']).toString();
+      newConfirmedCases =
+          NumberFormat.decimalPattern().format(data['newConfirmed']).toString();
+      newDeaths =
+          NumberFormat.decimalPattern().format(data['newDeaths']).toString();
+      totalConfirmedCases = NumberFormat.decimalPattern()
+          .format(data['totalConfirmed'])
+          .toString();
+      totalDeathCases =
+          NumberFormat.decimalPattern().format(data['totalDeaths']).toString();
+      totalRecovered = NumberFormat.decimalPattern()
+          .format(data['totalConfirmed'] - data['totalDeaths'])
+          .toString();
       loading = false;
     });
   }

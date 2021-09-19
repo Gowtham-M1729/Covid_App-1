@@ -155,7 +155,7 @@ def MostCases():
 
         count = 0
         while count < 5:
-            d = l[i]
+            d = l[count]
             if d["country"] not in mostcase:
                 mostcase.append(d["country"])
                 count += 1

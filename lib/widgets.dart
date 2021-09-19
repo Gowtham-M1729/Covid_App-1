@@ -95,7 +95,7 @@ class _MostCasesState extends State<MostCases> {
   String country4 = "NA";
   String country5 = "NA";
 
-  void getCountries() async{
+  void getCountries() async {
     var url = Uri.https('projectify-covidapp.herokuapp.com', '/MostCases');
     var response = await http.get(url);
 
@@ -168,9 +168,9 @@ class CountryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(context).push(countryCases());
-      },
+      onTap: (countryName == 'NA')
+          ? null
+          : () => Navigator.of(context).push(countryCases()),
       child: Container(
         margin: EdgeInsets.only(bottom: 10.0),
         decoration: BoxDecoration(

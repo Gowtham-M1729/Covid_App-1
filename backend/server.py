@@ -152,10 +152,13 @@ def MostCases():
         data = DataModel.query.order_by(DataModel.active).all()
         l = [x.dict() for x in data][::-1]
         mostcase = []
-        for i in range(5):
+
+        count = 0
+        while count < 5:
             d = l[i]
             if d["country"] not in mostcase:
                 mostcase.append(d["country"])
+                count += 1
         return jsonify(mostcase)
     except:
         return jsonify({'message': 'Country info not found'})

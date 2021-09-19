@@ -145,23 +145,18 @@ def countryinfo(name):
     except:
         return jsonify({'message': 'Country info not found'})
 
-
 @app.route('/MostCases')
 def MostCases():
     try:
         data = DataModel.query.order_by(DataModel.active).all()
-        l = [x.dict() for x in data][::-1]
+        l = [x.dict() for x in data][::-1][:5]
+        print(l)
         mostcase = []
-
-        count = 0
-        while count < 5:
-            d = l[count]
-            if d["country"] not in mostcase:
-                mostcase.append(d["country"])
-                count += 1
+        for cnt in l:
+            mostcase.append(cnt["country"])
         return jsonify(mostcase)
     except:
-        return jsonify({'message': 'Country info not found'})
+        return jsonify({'message': 'Information yet to be Updated'})
 
 
 if __name__ == "__main__":

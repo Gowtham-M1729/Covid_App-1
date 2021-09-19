@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'countryList.dart';
 import 'countrydetails.dart';
+import 'package:http/http.dart' as http;
 
 class UserDetails extends StatelessWidget {
   const UserDetails({
@@ -79,7 +82,41 @@ class CovidResources extends StatelessWidget {
   }
 }
 
-class MostCases extends StatelessWidget {
+class MostCases extends StatefulWidget {
+  @override
+  State<MostCases> createState() => _MostCasesState();
+}
+
+class _MostCasesState extends State<MostCases> {
+  List countries = [];
+  String country1 = "NA";
+  String country2 = "NA";
+  String country3 = "NA";
+  String country4 = "NA";
+  String country5 = "NA";
+
+  void getCountries() async{
+    var url = Uri.https('projectify-covidapp.herokuapp.com', '/MostCases');
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      for (var c in data) {
+        countries.add(c);
+      }
+    }
+    country1 = countries[0];
+    country2 = countries[1];
+    country3 = countries[2];
+    country4 = countries[3];
+    country5 = countries[4];
+  }
+
+  void initState() {
+    super.initState();
+    getCountries();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -108,11 +145,11 @@ class MostCases extends StatelessWidget {
               height: 298.0,
               child: Column(
                 children: [
-                  CountryTile(countryName: 'United States of America'),
-                  CountryTile(countryName: 'India'),
-                  CountryTile(countryName: 'Brazil'),
-                  CountryTile(countryName: 'United Kingdom'),
-                  CountryTile(countryName: 'Russian Federation'),
+                  CountryTile(countryName: country1),
+                  CountryTile(countryName: country2),
+                  CountryTile(countryName: country3),
+                  CountryTile(countryName: country4),
+                  CountryTile(countryName: country5),
                 ],
               ),
             ),

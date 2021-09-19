@@ -154,7 +154,8 @@ def MostCases():
         mostcase = []
         for i in range(5):
             d = l[i]
-            mostcase.append(d["country"])
+            if d["country"] not in mostcase:
+                mostcase.append(d["country"])
         return jsonify(mostcase)
     except:
         return jsonify({'message': 'Country info not found'})

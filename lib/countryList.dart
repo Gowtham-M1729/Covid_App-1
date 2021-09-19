@@ -27,6 +27,9 @@ class _CountriesListState extends State<CountriesList> {
       }
       // print(countries);
     }
+    else {
+      throw Exception('Failed to load data');
+    }
 
     setState(() {
       loading = false;

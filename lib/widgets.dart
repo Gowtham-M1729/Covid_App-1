@@ -105,12 +105,16 @@ class _MostCasesState extends State<MostCases> {
       for (var c in data) {
         countries.add(c);
       }
+      country1 = countries[0];
+      country2 = countries[1];
+      country3 = countries[2];
+      country4 = countries[3];
+      country5 = countries[4];
     }
-    country1 = countries[0];
-    country2 = countries[1];
-    country3 = countries[2];
-    country4 = countries[3];
-    country5 = countries[4];
+    else {
+      throw Exception('Failed to load');
+    }
+    
     loading = false;
   }
 

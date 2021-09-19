@@ -88,6 +88,7 @@ class MostCases extends StatefulWidget {
 }
 
 class _MostCasesState extends State<MostCases> {
+  bool loading = true;
   List countries = [];
   String country1 = "NA";
   String country2 = "NA";
@@ -110,6 +111,7 @@ class _MostCasesState extends State<MostCases> {
     country3 = countries[2];
     country4 = countries[3];
     country5 = countries[4];
+    loading = false;
   }
 
   void initState() {
@@ -140,19 +142,25 @@ class _MostCasesState extends State<MostCases> {
               ),
               textAlign: TextAlign.left,
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-              height: 298.0,
-              child: Column(
-                children: [
-                  CountryTile(countryName: country1),
-                  CountryTile(countryName: country2),
-                  CountryTile(countryName: country3),
-                  CountryTile(countryName: country4),
-                  CountryTile(countryName: country5),
-                ],
-              ),
-            ),
+            (loading)
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.purple,
+                    ),
+                  )
+                : Container(
+                    margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                    height: 298.0,
+                    child: Column(
+                      children: [
+                        CountryTile(countryName: country1),
+                        CountryTile(countryName: country2),
+                        CountryTile(countryName: country3),
+                        CountryTile(countryName: country4),
+                        CountryTile(countryName: country5),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),

@@ -2,7 +2,6 @@ import 'package:covid_app/countrydetails.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-// import 'package:search_choices/search_choices.dart';
 
 class CountriesList extends StatefulWidget {
   const CountriesList({Key? key}) : super(key: key);

@@ -55,7 +55,6 @@ class Global(db.Model):
 
 
 def updateDatabase():
-    db.create_all()
     db.drop_all()
     print("Updating database ....")
     BASE = "https://api.covid19api.com/total/country/"

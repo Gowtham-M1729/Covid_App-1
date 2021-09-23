@@ -55,6 +55,8 @@ class Global(db.Model):
 
 
 def updateDatabase():
+    db.create_all()
+    db.drop_all()
     print("Updating database ....")
     BASE = "https://api.covid19api.com/total/country/"
     lst_countrysummary = (requests.get(
@@ -159,8 +161,6 @@ def MostCases():
 
 
 if __name__ == "__main__":
-    db.create_all()
-    db.drop_all()
     thread = threading.Thread(target=updateDatabase)
     thread.start()
     scheduler = BackgroundScheduler()

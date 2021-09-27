@@ -1,6 +1,6 @@
 # covid_app
 
-A new Flutter project.
+<h2>This is a covid cases tracker app built using Flutter and flask for backend</h2>
 <h4>Screenshots</h4>
 <br>
 
@@ -23,3 +23,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+<h3>TODO</h4>
+1. Implement Graph Functionality
+<br>
+2. Add Call helpline Functionality

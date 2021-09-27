@@ -1,6 +1,15 @@
 # covid_app
 
 A new Flutter project.
+<h4>Screenshots</h4>
+<br>
+
+<p>Homescreen</p>
+<img src = "Screenshots/screen1.png" width="200" height="400">
+<p>Search Screen</p>
+<img src = "Screenshots/screen2.png" width="200" height="400">
+<p> Country Details Screen </p>
+<img src = "Screenshots/screen3.png" width="200" height="400">
 
 ## Getting Started
 

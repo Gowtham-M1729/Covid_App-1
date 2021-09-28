@@ -121,39 +121,53 @@ class _CountryDetailsState extends State<CountryDetails> {
                       totalRecovered: '$totalRecovered',
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(17.0),
-                            color: const Color(0xff8f7ae2),
-                          ),
-                          child: Text(
-                            'Call Helpline',
-                            style: TextStyle(
-                              fontFamily: 'Segoe UI',
-                              fontSize: 27,
-                              color: const Color(0xffffffff),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            margin: EdgeInsets.only(left: 12.0),
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(17.0),
+                              color: const Color(0xff8f7ae2),
                             ),
-                            textAlign: TextAlign.left,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Vaccination',
+                                style: TextStyle(
+                                  fontFamily: 'Segoe UI',
+                                  fontSize: 27,
+                                  color: const Color(0xffffffff),
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 20.0),
-                        Container(
-                          padding: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(17.0),
-                            color: const Color(0xff8f7ae2),
-                          ),
-                          child: Text(
-                            'Call Helpline',
-                            style: TextStyle(
-                              fontFamily: 'Segoe UI',
-                              fontSize: 27,
-                              color: const Color(0xffffffff),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            margin: EdgeInsets.only(right: 12.0),
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(17.0),
+                              color: const Color(0xff8f7ae2),
                             ),
-                            textAlign: TextAlign.left,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Call Helpline',
+                                style: TextStyle(
+                                  fontFamily: 'Segoe UI',
+                                  fontSize: 27,
+                                  color: const Color(0xffffffff),
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
                           ),
                         ),
                       ],

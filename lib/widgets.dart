@@ -14,24 +14,25 @@ class UserDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      textBaseline: TextBaseline.alphabetic,
-      children: [
-        Icon(Icons.person, size: 35.0),
-        SizedBox(
-          width: 5.0,
-        ),
-        Text(
-          'Hello James,',
-          style: TextStyle(
-            fontFamily: 'Segoe UI',
-            fontSize: 27,
-            color: const Color(0xff000000),
-            fontWeight: FontWeight.w700,
+    return Container(
+      margin: EdgeInsets.only(left: 5.0, top: 5.0),
+      child: Row(
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          Icon(Icons.person, size: 32.0),
+          SizedBox(width: 5.0),
+          Text(
+            'Hi there! 👋,',
+            style: TextStyle(
+              fontFamily: 'Segoe UI',
+              fontSize: 27,
+              color: const Color(0xff000000),
+              fontWeight: FontWeight.w700,
+            ),
+            textAlign: TextAlign.left,
           ),
-          textAlign: TextAlign.left,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -110,11 +111,10 @@ class _MostCasesState extends State<MostCases> {
       country3 = countries[2];
       country4 = countries[3];
       country5 = countries[4];
-    }
-    else {
+    } else {
       throw Exception('Failed to load');
     }
-    
+
     loading = false;
   }
 
